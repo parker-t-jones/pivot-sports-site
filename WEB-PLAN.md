@@ -237,6 +237,33 @@ SPA fallback: this export emits only `/index.html`. Add a Pages `_redirects` of 
 
 `app.json` `scheme` is `pivot`. That is the iOS URL scheme. It is not the web origin.
 
+## Deploy
+
+Second Cloudflare Pages project, hostname `app.pivot-sports.app`. Do not publish this from the marketing project (`pivot-sports-site`). Create the Pages project by hand. These are the settings.
+
+Build command, from the app repo root:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm --filter @pivot/app exec expo export -p web --output-dir dist
+```
+
+Output directory: `app/dist`.
+
+SPA fallback: `app/public/_redirects` contains `/* /index.html 200`. Expo copies that file into the export root. A check export on 2026-10-10 wrote `/tmp/pivot-web-w4/_redirects` with that line. Cache `/_expo/static/js/web/entry-*.js` for a long time. Cache `index.html` briefly.
+
+`EXPO_PUBLIC_*` is inlined at build time. Set these as Pages build variables. Do not upload `app/.env`. That file is the local stack (`http://127.0.0.1:54321` and `:3000`).
+
+| Variable | Production value |
+| --- | --- |
+| `EXPO_PUBLIC_API_BASE_URL` | `https://pivot-sports-api.fly.dev` (https, no trailing slash, no `/v1`) |
+| `EXPO_PUBLIC_SUPABASE_URL` | `https://taucqrptzfyzhfzpinzo.supabase.co` |
+| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | The publishable anon key already stored in EAS production under this name. Not the service-role key. Not the value in `app/.env`. |
+
+Do not set `EXPO_PUBLIC_REVENUECAT_API_KEY` on the web build. `WEB_DEV_ORIGIN` is an API env var on Fly, not an `EXPO_PUBLIC_` var. Leave it empty in production. The production web origin is allowed without it.
+
+CORS on `https://pivot-sports-api.fly.dev` is still the old process until that API deploy. The Pages build will not fix preflight by itself.
+
 ## Pro entitlement
 
 Web v1 shows status and does not sell Pro. That is safe only if a browser session cannot grant itself Pro.
@@ -282,7 +309,7 @@ No iOS behavior change. On web, do not call `Linking.canOpenURL` and do not use 
 
 ### W4 — Hosting prep
 
-Config only. Build command, output directory, SPA fallback, and `EXPO_PUBLIC_*` production values live under "Deploy." The Pages project itself is created by hand.
+Config only. `app/public/_redirects` is the SPA fallback, and Expo copies it into `app/dist`. Build command, output directory, and `EXPO_PUBLIC_*` production values are under "Deploy." The Pages project itself is created by hand.
 
 ### Later — in-tab alerts and Web Push
 
