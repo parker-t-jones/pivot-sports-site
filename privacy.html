@@ -12,62 +12,129 @@
 <body>
 
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: August 28, 2026</p>
+<p class="updated">Last updated: November 13, 2026</p>
 
 <p>Pivot ("the app," "we," "us") is developed by Parker T. Jones. This policy explains
 what information Pivot collects, how it's used, and the choices you have.</p>
 
 <h2>Information We Collect</h2>
-<p>Pivot collects only what's needed to route you to the correct broadcast based on
-your fantasy football roster:</p>
+<p>Pivot collects what it needs to route you to the broadcast that matters to you:</p>
 <ul>
   <li><strong>Account information.</strong> When you create a Pivot account, we
   collect your email address and store authentication credentials securely
-  through our database provider, Supabase.</li>
+  through our database provider, Supabase. We never see your plaintext
+  password.</li>
+  <li><strong>Your picks.</strong> The lineup you connect or enter and the picks
+  you add: spreads, totals, moneylines, player and team props, parlays, and
+  survivor picks. We use these to work out which live game matters to you right
+  now.</li>
   <li><strong>Fantasy league data.</strong> If you connect a Sleeper account,
-  Pivot receives your league and roster information via Sleeper's API in order
-  to determine which players are on your team. If you enter a league manually,
-  we store only what you enter.</li>
-  <li><strong>Push notification tokens.</strong> If you enable notifications,
-  we store a device push token (via Apple's Push Notification service, routed
-  through Expo's push infrastructure) so we can send you game-time alerts.
-  We do not have access to the content of any other notifications on your
-  device.</li>
+  Pivot receives your league and roster information via Sleeper's public
+  API to determine which players are on your team. We never ask for or store
+  your Sleeper password. If you enter a league manually, we store only what you
+  enter.</li>
+  <li><strong>Streaming services you have.</strong> The services you tell us
+  you subscribe to (for example YouTube TV, Prime Video, or cable), so we can
+  send you a working "Watch on" link.</li>
+  <li><strong>Saved stream links.</strong> If you paste a direct link to a
+  stream for a game, we save it so you do not have to paste it again.</li>
+  <li><strong>What you are watching.</strong> A single record of which game you
+  are on and which device, so Home can show what is live right now.</li>
+  <li><strong>Notification settings and push information.</strong> How you want
+  to be alerted (all alerts, only important ones, or none; quiet hours; alert
+  timing), and, if you enable notifications, a device push token (via Apple's
+  Push Notification service, routed through Expo's push infrastructure) or, on
+  the web, a browser push subscription. We do not have access to the content of
+  any other notifications on your device.</li>
+  <li><strong>Subscription status.</strong> Whether you are on the free plan or
+  Pro. Payment and billing are handled by Apple and our subscription partner,
+  RevenueCat. We receive whether your subscription is active, not your payment
+  details.</li>
+  <li><strong>Delivery and debugging records.</strong> A log of which alerts we
+  computed and sent you, used to avoid duplicate alerts and to fix problems.</li>
+</ul>
+
+<h2>Importing a Pick From a Screenshot</h2>
+<p>You can add a pick by uploading a screenshot of a bet slip instead of typing
+it in. Pivot reads the screenshot and fills in the legs for you to review.</p>
+<ul>
+  <li>Your screenshot is sent from the app to our server, and from our server to
+  an AI model run by Anthropic, which reads it and returns the legs as
+  structured data (player, bet type, line). The app never sends it to Anthropic
+  directly.</li>
+  <li><strong>We do not save your screenshot or the AI's raw answer.</strong>
+  Both exist only for the moment it takes to process the request. We keep a
+  count of how many imports you have used this week so we can enforce the weekly
+  limit, and we log counts and error types if something goes wrong. We do not
+  log the image or what was read from it.</li>
+  <li>Anthropic handles the screenshot under its API terms. As of this
+  writing, Anthropic states that it does not use API inputs or outputs to train
+  its models by default and deletes them from its systems within 30 days, with
+  limited exceptions such as content flagged for violating its usage policy or
+  retention required by law.</li>
+  <li>Nothing from the screenshot becomes a pick until you review the legs and
+  save them. A screenshot may show personal details such as a name, account
+  number, or balance. You can crop those out first if you would rather
+  Anthropic not receive them; Pivot only uses the legs.</li>
 </ul>
 
 <h2>Information We Do Not Collect</h2>
-<p>Pivot does not currently use third-party analytics, advertising, or
-crash-reporting services. If this changes in the future, we will update this
-policy and, where required, the App Store's privacy disclosures before the
-change ships.</p>
+<p>Pivot does not use third-party analytics or advertising services, and does
+not track you across other companies' apps or websites. We use error-monitoring
+tooling (Sentry) for parts of our backend; it does not receive information that
+identifies you. If any of this changes, we will update this policy and, where
+required, the App Store's privacy disclosures before the change ships.</p>
 
 <h2>How We Use Your Information</h2>
 <ul>
   <li>To authenticate your account and keep it secure</li>
-  <li>To sync your fantasy roster and determine which broadcast to route you to</li>
-  <li>To send push notifications you've opted into (e.g., game start alerts)</li>
+  <li>To sync your fantasy roster and picks and determine which broadcast to route you to</li>
+  <li>To send push notifications you've opted into (e.g., game alerts)</li>
   <li>To operate, maintain, and improve the app</li>
 </ul>
 <p>We do not sell your personal information, and we do not share it with
-third parties for their own marketing purposes.</p>
+third parties for their own marketing purposes. We do not show ads. Pivot never
+takes bets, never shows promo codes or sportsbook affiliate links, and never
+encourages you to place a bet; it only helps you find the game that matters to
+you.</p>
 
 <h2>Third-Party Services</h2>
 <p>Pivot relies on the following third-party services to function. Each has
 its own privacy practices governing the data that passes through them:</p>
 <ul>
-  <li><strong>Sleeper</strong> — for fantasy league and roster data, if you
-  choose to connect a Sleeper account</li>
-  <li><strong>Supabase</strong> — for account authentication and database
+  <li><strong>Supabase</strong> — account authentication and database
   storage</li>
-  <li><strong>Apple / Expo push services</strong> — for delivering push
-  notifications</li>
+  <li><strong>Fly.io</strong> — runs our servers</li>
+  <li><strong>Sleeper</strong> — fantasy league and roster data, if you
+  choose to connect a Sleeper account. We send Sleeper no personal information
+  beyond the league and roster identifiers you give us.</li>
+  <li><strong>Apple / Expo push services</strong> — delivering push
+  notifications to your iPhone</li>
+  <li><strong>Your browser's push service</strong> — delivering push
+  notifications on the web</li>
+  <li><strong>RevenueCat</strong> — managing subscriptions and telling us
+  whether you are on Pro</li>
+  <li><strong>Anthropic</strong> — reads the screenshot when you import a pick
+  from one (see above). It receives the image only, from our server, with
+  nothing that identifies you.</li>
+  <li><strong>Sentry</strong> — backend error monitoring, as described
+  above</li>
 </ul>
 
 <h2>Data Retention and Deletion</h2>
-<p>We retain your account information for as long as your account is active.
-You can delete your account and associated data at any time directly within
-the app, under Settings. Deleting your account removes your stored league
-data, push tokens, and authentication credentials from our systems.</p>
+<p>We retain your account information and the data described above for as long
+as your account is active, so the app keeps working the way you set it up.
+Settings such as streaming services, notification preferences, and saved stream
+links update whenever you change them, and push subscriptions that stop working
+are removed automatically.</p>
+<p>You can delete your account and associated data at any time directly within
+the app, under Settings. Deleting your account permanently removes your profile,
+picks, fantasy league connections, streaming-service selections, notification
+settings, saved stream links, viewing history, and push subscriptions from our
+systems. One limit: your subscription record held by our payment partner,
+RevenueCat, is not deleted by this action, and is governed by RevenueCat's own
+data practices. Standard infrastructure logs kept by our hosting providers age
+out under their own retention schedules.</p>
 
 <h2>Children's Privacy</h2>
 <p>Pivot is not directed at children under 13, and we do not knowingly
